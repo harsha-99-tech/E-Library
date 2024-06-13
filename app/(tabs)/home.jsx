@@ -1,53 +1,69 @@
+import React, { useState } from "react";
 import {
   FlatList,
-  Image,
   RefreshControl,
   SafeAreaView,
-  StyleSheet,
-  Text,
   View,
+  Text,
 } from "react-native";
-import React from "react";
+import { images } from "../../constants";
+import Header from "../../components/home/Header";
+import Categories from "../../components/home/Categories";
+import LatestSection from "../../components/home/LatestSection";
+import ExploreItem from "../../components/home/ExploreItem";
 import EmptyState from "../../components/EmptyState";
-import { icons, images } from "../../constants";
-import SearchInput from "../../components/SearchInput";
-import ScreenHeaderBtn from "../../components/header/ScreenHeaderBtn";
-import Library from "../../components/Library";
 
-const home = () => {
+const Home = () => {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    // Add your refresh logic here
+    setRefreshing(false);
+  };
+
+  const exploreBooks = [
+    {
+      id: 1,
+      title: "Lunar Storm",
+      author: "Kumara Siriwan",
+      image: images.book3,
+      rating: 5.7,
+    },
+    {
+      id: 2,
+      title: "Harry Potter",
+      author: "J.K. Rowling",
+      image: images.book4,
+      rating: 7.7,
+    },
+    {
+      id: 3,
+      title: "Harry Potter",
+      author: "J.K. Rowling",
+      image: images.book4,
+      rating: 7.7,
+    },
+  ];
+
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="bg-white h-full">
       <FlatList
-        data={[{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]}
-        keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => (
-          <Text className="text-3xl text-black">{item.id}</Text>
-        )}
+        data={exploreBooks}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => <ExploreItem book={item} />}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
-            <View className="justify-between items-start flex-row mb-6">
-              <View className="mt-1.5 flex-row">
-                <ScreenHeaderBtn iconUrl={icons.menu} dimension="60%" />
-              </View>
-
-              <View className="mt-1.5 flex-row">
-                <SearchInput />
-
-                <ScreenHeaderBtn iconUrl={icons.notification} dimension="60%" />
-              </View>
-            </View>
-
-            <View className="w-full flex-1  ">
-              <Text className="text-gray-100 text-lg font=pregular mb-3">
-                Categories
+            <Header />
+            <Categories />
+            <LatestSection />
+            <View>
+              <Text className="text-lg text-black font-regular mb-3">
+                Explore
               </Text>
-              <Library books={[{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]} />
-            </View>
-            <View className="w-full flex-1 ">
-              <Text className="text-gray-100 text-lg font=pregular mb-3">
-                Library
+              <Text className="text-sm text-gray-500 mb-4">
+                Our store has more than 390 books
               </Text>
-              <Library books={[{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]} />
             </View>
           </View>
         )}
@@ -57,12 +73,12 @@ const home = () => {
             subtitle="Be the first one to upload a book"
           />
         )}
-        refreshControl={<RefreshControl />}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
     </SafeAreaView>
   );
 };
 
-export default home;
-
-const styles = StyleSheet.create({});
+export default Home;

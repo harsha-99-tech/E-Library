@@ -15,10 +15,10 @@ const EmptyState = ({ title, subtitle }) => {
         resizeMode="contain"
       />
 
-      <Text className="text-xl text-center font-psemibold text-white mt-2">
+      <Text className="text-xl text-center font-psemibold text-black mt-2">
         {title}
       </Text>
-      <Text className="font-pmedium text-sm text-gray-100">{subtitle}</Text>
+      <Text className="font-pmedium text-sm text-gray">{subtitle}</Text>
 
       <CustomButton
         title="Add Book"

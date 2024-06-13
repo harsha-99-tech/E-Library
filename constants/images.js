@@ -1,9 +1,7 @@
 import profile from "../assets/images/profile.png";
-import thumbnail from "../assets/images/thumbnail.png";
-import cards from "../assets/images/cards.png";
-import path from "../assets/images/path.png";
-import logo from "../assets/images/logo.png";
-import logoSmall from "../assets/images/logo-small.png";
-import empty from "../assets/images/empty.png";
+import book1 from "../assets/images/book1.png";
+import book2 from "../assets/images/book2.png";
+import book3 from "../assets/images/book3.png";
+import book4 from "../assets/images/book4.png";
 
-export default { profile, thumbnail, cards, path, logo, logoSmall, empty };
+export default { profile, book1, book2, book3, book4 };
